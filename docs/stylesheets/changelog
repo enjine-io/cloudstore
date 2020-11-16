@@ -1,0 +1,20 @@
+<h1 id='29-oct-2020'>29 Oct 2020</h1><h2 id='changed'>Changed</h2>
+<p>// This is the logo at the top of the ToC
+  .logo {
+    display: block;
+    max-width: 100%;
+    margin-bottom: $logo-margin;
+  }</p>
+<h2 id='to'>To</h2>
+<p>// This is the logo at the top of the ToC
+  .logo {
+    display: block;
+    max-width: 70%;
+    margin-bottom: $logo-margin;
+    margin-left:auto;
+    margin-right:auto;
+  }</p>
+<h3 id='reason'>Reason</h3>
+<ul>
+<li>Fit company logo in centre</li>
+</ul>

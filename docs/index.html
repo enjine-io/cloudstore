@@ -279,7 +279,7 @@
   color: #859900;
 }
     </style>
-    <link href="stylesheets/screen-a51e40de.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/screen-b04e26e4.css" rel="stylesheet" media="screen" />
     <link href="stylesheets/print-953e3353.css" rel="stylesheet" media="print" />
       <script src="javascripts/all-7e253337.js"></script>
 
@@ -407,11 +407,11 @@
 <tr>
 <td>callback</td>
 <td>no</td>
-<td>A function that returns a response object: response.  If response.error is undefined, you can access the data through response.data.</td>
+<td>A function that returns a response object: response.  If response.error is null, you can access the data through response.data.</td>
 </tr>
 </tbody></table>
 <h3 id='example'>Example</h3><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="c1">//Create CloudStore component.</span>
-<span class="nx">cloud</span> <span class="o">=</span> <span class="nx">CreateCloudStore</span><span class="p">(</span> <span class="dl">"</span><span class="s2">&lt;YOUR_CLOUDSTORE_KEY&gt;</span><span class="dl">"</span> <span class="p">)</span>
+<span class="nx">cloud</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CloudStore</span><span class="p">(</span> <span class="dl">"</span><span class="s2">&lt;YOUR_CLOUDSTORE_KEY&gt;</span><span class="dl">"</span> <span class="p">)</span>
 
 <span class="c1">//Save some data.</span>
 <span class="nx">cloud</span><span class="p">.</span><span class="nx">Save</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Shopping_List</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span><span class="dl">"</span><span class="s2">Apples</span><span class="dl">"</span><span class="p">:</span><span class="mi">8</span><span class="p">,</span><span class="dl">"</span><span class="s2">Oranges</span><span class="dl">"</span><span class="p">:</span><span class="mi">6</span><span class="p">},</span> <span class="nx">onSave</span> <span class="p">)</span>
@@ -420,7 +420,7 @@
 <span class="kd">function</span> <span class="nx">onSave</span><span class="p">(</span> <span class="nx">response</span> <span class="p">)</span>
 <span class="p">{</span>
     <span class="k">if</span><span class="p">(</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="p">)</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Error: </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">, </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">message</span> <span class="p">)</span>
-    <span class="k">else</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">response</span><span class="p">.</span><span class="nx">message</span> <span class="p">);</span>
+    <span class="k">else</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">response</span><span class="p">.</span><span class="nx">message</span> <span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div>
 <blockquote>
@@ -444,7 +444,7 @@
 <tr>
 <td>callback</td>
 <td>no</td>
-<td>A function that returns a response object: response.  If response.error is undefined, you can access the data through response.data.</td>
+<td>A function that returns a response object: response.  If response.error is null, you can access the data through response.data.</td>
 </tr>
 <tr>
 <td>password</td>
@@ -453,7 +453,7 @@
 </tr>
 </tbody></table>
 <h3 id='example-2'>Example</h3><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="c1">//Create CloudStore component.</span>
-<span class="nx">cloud</span> <span class="o">=</span> <span class="nx">CreateCloudStore</span><span class="p">(</span> <span class="dl">"</span><span class="s2">&lt;YOUR_CLOUDSTORE_KEY&gt;</span><span class="dl">"</span> <span class="p">)</span>
+<span class="nx">cloud</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CloudStore</span><span class="p">(</span> <span class="dl">"</span><span class="s2">&lt;YOUR_CLOUDSTORE_KEY&gt;</span><span class="dl">"</span> <span class="p">)</span>
 
 <span class="c1">//Load some data.</span>
 <span class="nx">cloud</span><span class="p">.</span><span class="nx">Load</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Shopping_List</span><span class="dl">"</span><span class="p">,</span> <span class="nx">onLoad</span> <span class="p">)</span>
@@ -461,8 +461,8 @@
 <span class="c1">//Handle the response.</span>
 <span class="kd">function</span> <span class="nx">onLoad</span><span class="p">(</span> <span class="nx">response</span> <span class="p">)</span>
 <span class="p">{</span>
-    <span class="k">if</span><span class="p">(</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="p">)</span> <span class="nx">app</span><span class="p">.</span><span class="nx">ShowPopup</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Error: </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">, </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">message</span> <span class="p">)</span>
-    <span class="k">else</span> <span class="nx">app</span><span class="p">.</span><span class="nx">ShowPopup</span><span class="p">(</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span> <span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="p">)</span> <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Error: </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">, </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">message</span> <span class="p">)</span>
+    <span class="k">else</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span> <span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div><h2 id='merging-data'>Merging data</h2>
 <p><code>cloud.Merge( key, value, callback, password )</code></p>
@@ -473,7 +473,7 @@
 
 <ul>
 <li>The <strong>Merge</strong> function recursively merges values passed with the source object, replacing any existing data and adding new data.</li>
-<li>Source properties that resolve to undefined are skipped if a destination value exists.</li>
+<li>Source properties that resolve to null are skipped if a destination value exists.</li>
 <li>Array and plain object properties are merged recursively.</li>
 <li>Other objects and value types are overridden by assignment.</li>
 <li>Source objects are applied from left to right.</li>
@@ -500,7 +500,7 @@
 <tr>
 <td>callback</td>
 <td>no</td>
-<td>A function that returns a response object: response.  If response.error is undefined, you can access the data through response.data.</td>
+<td>A function that returns a response object: response.  If response.error is null, you can access the data through response.data.</td>
 </tr>
 <tr>
 <td>password</td>
@@ -509,7 +509,7 @@
 </tr>
 </tbody></table>
 <h3 id='example-3'>Example</h3><h4 id='app-1'>App 1</h4><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="c1">//Create CloudStore component.</span>
-<span class="nx">cloud</span> <span class="o">=</span> <span class="nx">CreateCloudStore</span><span class="p">(</span> <span class="dl">"</span><span class="s2">&lt;YOUR_CLOUDSTORE_KEY&gt;</span><span class="dl">"</span> <span class="p">)</span>
+<span class="nx">cloud</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CloudStore</span><span class="p">(</span> <span class="dl">"</span><span class="s2">&lt;YOUR_CLOUDSTORE_KEY&gt;</span><span class="dl">"</span> <span class="p">)</span>
 
 <span class="c1">//Save some data.</span>
 <span class="nx">cloud</span><span class="p">.</span><span class="nx">Save</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Shopping_List</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span><span class="dl">"</span><span class="s2">Apples</span><span class="dl">"</span><span class="p">:</span><span class="mi">8</span><span class="p">,</span><span class="dl">"</span><span class="s2">Oranges</span><span class="dl">"</span><span class="p">:</span><span class="mi">6</span><span class="p">},</span> <span class="nx">onSave</span> <span class="p">)</span>
@@ -517,10 +517,10 @@
 <span class="kd">function</span> <span class="nx">onSave</span><span class="p">(</span> <span class="nx">response</span> <span class="p">)</span>
 <span class="p">{</span>
     <span class="k">if</span><span class="p">(</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="p">)</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Error: </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">, </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">message</span> <span class="p">)</span>
-    <span class="k">else</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">response</span><span class="p">.</span><span class="nx">message</span> <span class="p">);</span>
+    <span class="k">else</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">response</span><span class="p">.</span><span class="nx">message</span> <span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div><h4 id='app-2'>App 2</h4><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="c1">// Create CloudStore component.</span>
-<span class="nx">cloud</span> <span class="o">=</span> <span class="nx">CreateCloudStore</span><span class="p">(</span> <span class="dl">"</span><span class="s2">&lt;YOUR_CLOUDSTORE_KEY&gt;</span><span class="dl">"</span> <span class="p">)</span>
+<span class="nx">cloud</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CloudStore</span><span class="p">(</span> <span class="dl">"</span><span class="s2">&lt;YOUR_CLOUDSTORE_KEY&gt;</span><span class="dl">"</span> <span class="p">)</span>
 
 <span class="c1">// Update our Shopping List with some a new item and change the value of existing items.</span>
 <span class="nx">cloud</span><span class="p">.</span><span class="nx">Merge</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Shopping_List</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span><span class="dl">"</span><span class="s2">Apples</span><span class="dl">"</span><span class="p">:</span><span class="mi">8</span><span class="p">,</span><span class="dl">"</span><span class="s2">Oranges</span><span class="dl">"</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="dl">"</span><span class="s2">Bananas</span><span class="dl">"</span><span class="p">:</span><span class="mi">8</span><span class="p">},</span> <span class="nx">onSave</span> <span class="p">)</span>
@@ -531,7 +531,7 @@
     <span class="k">if</span><span class="p">(</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="p">)</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Error: </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">, </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">message</span> <span class="p">)</span>
     <span class="k">else</span> <span class="p">{</span>
         <span class="c1">// Data merged successfully    </span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">response</span><span class="p">.</span><span class="nx">message</span> <span class="p">);</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">response</span><span class="p">.</span><span class="nx">message</span> <span class="p">)</span>
 
         <span class="c1">// Lets now reload the data to see if our object has changed</span>
         <span class="nx">cloud</span><span class="p">.</span><span class="nx">Load</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Shopping_List</span><span class="dl">"</span><span class="p">,</span> <span class="nx">onLoad</span> <span class="p">)</span>        
@@ -542,8 +542,8 @@
 <span class="kd">function</span> <span class="nx">onLoad</span><span class="p">(</span> <span class="nx">response</span> <span class="p">)</span>
 <span class="p">{</span>
     <span class="c1">// You should now see your new Shopping_List with 10 Oranges and 8 Bananas</span>
-    <span class="k">if</span><span class="p">(</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="p">)</span> <span class="nx">app</span><span class="p">.</span><span class="nx">ShowPopup</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Error: </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">, </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">message</span> <span class="p">)</span>
-    <span class="k">else</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span> <span class="p">);</span>    
+    <span class="k">if</span><span class="p">(</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="p">)</span> <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Error: </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">, </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">message</span> <span class="p">)</span>
+    <span class="k">else</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span> <span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div><h2 id='listing-data-files'>Listing Data Files</h2>
 <p><code>cloud.List( filter, callback )</code></p>
@@ -571,11 +571,11 @@
 <tr>
 <td>callback</td>
 <td>yes</td>
-<td>A function that returns a response object: response.  If response.error is undefined, you can access the data through response.data.</td>
+<td>A function that returns a response object: response.  If response.error is null, you can access the data through response.data.</td>
 </tr>
 </tbody></table>
 <h3 id='example-4'>Example</h3><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="c1">//Create CloudStore component.</span>
-<span class="nx">cloud</span> <span class="o">=</span> <span class="nx">CreateCloudStore</span><span class="p">(</span> <span class="dl">"</span><span class="s2">&lt;YOUR_CLOUDSTORE_KEY&gt;</span><span class="dl">"</span> <span class="p">)</span>
+<span class="nx">cloud</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CloudStore</span><span class="p">(</span> <span class="dl">"</span><span class="s2">&lt;YOUR_CLOUDSTORE_KEY&gt;</span><span class="dl">"</span> <span class="p">)</span>
 
 <span class="nx">cloud</span><span class="p">.</span><span class="nx">List</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Shopping</span><span class="dl">"</span><span class="p">,</span> <span class="nx">onList</span> <span class="p">)</span>
 
@@ -583,7 +583,7 @@
 <span class="kd">function</span> <span class="nx">onList</span><span class="p">(</span> <span class="nx">response</span> <span class="p">)</span>
 <span class="p">{</span>
     <span class="k">if</span><span class="p">(</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="p">)</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Error: </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">, </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">message</span> <span class="p">)</span>
-    <span class="k">else</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">response</span><span class="p">.</span><span class="nx">data</span> <span class="p">);</span>
+    <span class="k">else</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">response</span><span class="p">.</span><span class="nx">data</span> <span class="p">)</span>
     <span class="c1">// </span>
 <span class="p">}</span>
 </code></pre></div>
@@ -613,7 +613,7 @@ If you try removing an object that does not exist, it will return with an error 
 <tr>
 <td>callback</td>
 <td>no</td>
-<td>A function that returns a response object: response.  If response.error is undefined, you can access the data through response.data.</td>
+<td>A function that returns a response object: response.  If response.error is null, you can access the data through response.data.</td>
 </tr>
 <tr>
 <td>password</td>
@@ -622,7 +622,7 @@ If you try removing an object that does not exist, it will return with an error 
 </tr>
 </tbody></table>
 <h3 id='example-5'>Example</h3><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="c1">//Create CloudStore component.</span>
-<span class="nx">cloud</span> <span class="o">=</span> <span class="nx">CreateCloudStore</span><span class="p">(</span> <span class="dl">"</span><span class="s2">&lt;YOUR_CLOUDSTORE_KEY&gt;</span><span class="dl">"</span> <span class="p">)</span>
+<span class="nx">cloud</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CloudStore</span><span class="p">(</span> <span class="dl">"</span><span class="s2">&lt;YOUR_CLOUDSTORE_KEY&gt;</span><span class="dl">"</span> <span class="p">)</span>
 
 <span class="nx">cloud</span><span class="p">.</span><span class="nx">Delete</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Shopping_List</span><span class="dl">"</span><span class="p">,</span> <span class="nx">onDelete</span> <span class="p">)</span>
 
@@ -630,7 +630,7 @@ If you try removing an object that does not exist, it will return with an error 
 <span class="kd">function</span> <span class="nx">onDelete</span><span class="p">(</span> <span class="nx">response</span> <span class="p">)</span>
 <span class="p">{</span>
     <span class="k">if</span><span class="p">(</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="p">)</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Error: </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">, </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">message</span> <span class="p">)</span>
-    <span class="k">else</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">response</span><span class="p">.</span><span class="nx">message</span> <span class="p">);</span>
+    <span class="k">else</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">response</span><span class="p">.</span><span class="nx">message</span> <span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div><h2 id='password-protection'>Password Protection</h2>
 <p>You can control <strong>read</strong> and <strong>write</strong> access to your data files by setting a password to each file in the CloudStore <a href="https://enjine.cloud/cloudstore/admin.html">admin dashboard</a>.  </p>
@@ -644,7 +644,7 @@ and stay persistent event when your app is removed from your device.</p>
 <aside class="notice-right">To access your media files across multiple apps, you must use the same api key in each app</aside>
 </blockquote>
 <h2 id='upload'>Upload</h2>
-<p><code>cloud.Upload( data, filename, type, callback )</code></p>
+<p><code>cloud.Upload( data, filename, type, callback, password )</code></p>
 
 <p>The <strong>Upload</strong> function allows you to upload a file to the cloud.  You can set permissions for editing files in the <a href="https://enjine.cloud/cloudstore/admin.html">admin dashboard</a></p>
 
@@ -658,7 +658,7 @@ and stay persistent event when your app is removed from your device.</p>
 <tr>
 <td>data</td>
 <td>yes</td>
-<td>The file being uploaded in string form</td>
+<td>A base64 formatted string OR a file in a blob format.</td>
 </tr>
 <tr>
 <td>filename</td>
@@ -673,29 +673,28 @@ and stay persistent event when your app is removed from your device.</p>
 <tr>
 <td>callback</td>
 <td>no</td>
-<td>A function that returns a response object: response.  If response.error is undefined, you can access the data through response.data.</td>
+<td>A function that returns a response object: response.  If response.error is null, you can access the data through response.data.</td>
 </tr>
 <tr>
 <td>password</td>
 <td>no</td>
-<td>A string password if one has been set in the <a href="https://enjine.cloud/cloudstore/admin.html">admin dashboard</a></td>
+<td>A password if one has been set in the <a href="https://enjine.cloud/cloudstore/admin.html">admin dashboard</a></td>
 </tr>
 </tbody></table>
-<h3 id='example-6'>Example</h3><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">cloud</span> <span class="o">=</span> <span class="nx">CreateCloudStore</span><span class="p">(</span> <span class="dl">"</span><span class="s2">&lt;YOUR_CLOUDSTORE_KEY&gt;</span><span class="dl">"</span> <span class="p">)</span>
-<span class="nx">app</span><span class="p">.</span><span class="nx">ChooseFile</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Choose a file</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">*/*</span><span class="dl">"</span><span class="p">,</span> <span class="nx">OnFileChoose</span> <span class="p">);</span>
 
-<span class="c1">// Let's assume you choose an image as your file</span>
-<span class="kd">function</span> <span class="nx">OnFileChoose</span><span class="p">(</span> <span class="nx">filename</span> <span class="p">)</span>
-<span class="p">{</span>
-    <span class="c1">// filename</span>
-    <span class="nx">data</span> <span class="o">=</span> <span class="nx">app</span><span class="p">.</span><span class="nx">ReadFile</span><span class="p">(</span> <span class="nx">filename</span><span class="p">,</span> <span class="dl">"</span><span class="s2">base64</span><span class="dl">"</span> <span class="p">)</span>
-    <span class="nx">cloud</span><span class="p">.</span><span class="nx">Upload</span><span class="p">(</span> <span class="nx">data</span><span class="p">,</span> <span class="dl">"</span><span class="s2">jazz3.jpg</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">image/jpg</span><span class="dl">"</span><span class="p">,</span> <span class="nx">onUpload</span> <span class="p">)</span>
-<span class="p">}</span>
+<blockquote>
+<aside class="notice-right">There are no limitations to what file types can be uploaded, so long as they can be turned into a blob. Alternatively if you have a file already in a blob format, you can pass this directly in to the data parameter.</aside>
+</blockquote>
+<h3 id='example-6'>Example</h3><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">cloud</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CloudStore</span><span class="p">(</span> <span class="dl">"</span><span class="s2">&lt;YOUR_CLOUDSTORE_KEY&gt;</span><span class="dl">"</span> <span class="p">)</span>
+
+<span class="c1">// Let's assume you want to upload an image to the CloudStore</span>
+<span class="c1">// You must upload images as a string in a format such as base64</span>
+<span class="nx">cloud</span><span class="p">.</span><span class="nx">Upload</span><span class="p">(</span> <span class="nx">file_data</span><span class="p">,</span> <span class="dl">"</span><span class="s2">jazz3.jpg</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">image/jpg</span><span class="dl">"</span><span class="p">,</span> <span class="nx">onUpload</span> <span class="p">)</span>
 
 <span class="kd">function</span> <span class="nx">onUpload</span><span class="p">(</span> <span class="nx">response</span> <span class="p">)</span>
 <span class="p">{</span>
     <span class="k">if</span><span class="p">(</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="p">)</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Error: </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">, </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">message</span> <span class="p">)</span>
-    <span class="k">else</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span> <span class="p">);</span>
+    <span class="k">else</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span> <span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div><h2 id='file-location'>File Location</h2>
 <p>You can copy the full path to your file in the CloudStore <a href="https://enjine.cloud/cloudstore/admin.html">admin dashboard</a>. For more information on this read the section on <a href="#media">Media Files</a> below.</p>
@@ -747,7 +746,7 @@ in the panel to the right of the list.</p>
 
 <p>Now let&#39;s see what happens if we try merging new items into our shopping list without appending the password to our <strong>Merge</strong> function</p>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="c1">//Create CloudStore component.</span>
-<span class="nx">cloud</span> <span class="o">=</span> <span class="nx">CreateCloudStore</span><span class="p">(</span> <span class="dl">"</span><span class="s2">&lt;YOUR_CLOUDSTORE_KEY&gt;</span><span class="dl">"</span> <span class="p">)</span>
+<span class="nx">cloud</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CloudStore</span><span class="p">(</span> <span class="dl">"</span><span class="s2">&lt;YOUR_CLOUDSTORE_KEY&gt;</span><span class="dl">"</span> <span class="p">)</span>
 
 <span class="kd">function</span> <span class="nx">btnMerge_OnTouch</span><span class="p">()</span>
 <span class="p">{</span>
@@ -756,15 +755,15 @@ in the panel to the right of the list.</p>
 
 <span class="kd">function</span> <span class="nx">onMerge</span><span class="p">(</span> <span class="nx">response</span> <span class="p">)</span>
 <span class="p">{</span>
-    <span class="k">if</span><span class="p">(</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="p">)</span> <span class="nx">app</span><span class="p">.</span><span class="nx">ShowPopup</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Error: </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">, </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">message</span> <span class="p">)</span>
-    <span class="k">else</span> <span class="nx">app</span><span class="p">.</span><span class="nx">ShowPopup</span><span class="p">(</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span> <span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="p">)</span> <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Error: </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">, </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">message</span> <span class="p">)</span>
+    <span class="k">else</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span> <span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>If you try to run the code above you will get the following response in response.error: <strong>Locked</strong>.</p>
 
 <p>Now let&#39;s send the correct password as the final parameter in the <strong>Merge</strong> function like so:</p>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="c1">//Create CloudStore component.</span>
-<span class="nx">cloud</span> <span class="o">=</span> <span class="nx">CreateCloudStore</span><span class="p">(</span> <span class="dl">"</span><span class="s2">&lt;YOUR_CLOUDSTORE_KEY&gt;</span><span class="dl">"</span> <span class="p">)</span>
+<span class="nx">cloud</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CloudStore</span><span class="p">(</span> <span class="dl">"</span><span class="s2">&lt;YOUR_CLOUDSTORE_KEY&gt;</span><span class="dl">"</span> <span class="p">)</span>
 
 <span class="kd">function</span> <span class="nx">btnMerge_OnTouch</span><span class="p">()</span>
 <span class="p">{</span>
@@ -774,7 +773,7 @@ in the panel to the right of the list.</p>
 <span class="kd">function</span> <span class="nx">onMerge</span><span class="p">(</span> <span class="nx">response</span> <span class="p">)</span>
 <span class="p">{</span>
     <span class="k">if</span><span class="p">(</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="p">)</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Error: </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">, </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">message</span> <span class="p">)</span>
-    <span class="k">else</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span> <span class="p">);</span>
+    <span class="k">else</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span> <span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>If you now run this code you will see the message <strong>Entry saved</strong>.</p>
@@ -815,24 +814,21 @@ including a preview snapshot of the file if it&#39;s an image file.</p>
     - Now whenever we want to override the file, we must include the password as our final parameter in the <strong>Upload</strong> function</p>
 
 <p><code>For thie example we have assigned the password as &quot;12345&quot;</code></p>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">cloud</span> <span class="o">=</span> <span class="nx">CreateCloudStore</span><span class="p">(</span> <span class="dl">"</span><span class="s2">&lt;YOUR_CLOUDSTORE_KEY&gt;</span><span class="dl">"</span> <span class="p">)</span>
-<span class="nx">app</span><span class="p">.</span><span class="nx">ChooseFile</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Choose a file</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">*/*</span><span class="dl">"</span><span class="p">,</span> <span class="nx">OnFileChoose</span> <span class="p">);</span>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">cloud</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CloudStore</span><span class="p">(</span> <span class="dl">"</span><span class="s2">&lt;YOUR_CLOUDSTORE_KEY&gt;</span><span class="dl">"</span> <span class="p">)</span>
 
-<span class="c1">// Let's assume you choose an image as your file</span>
-<span class="kd">function</span> <span class="nx">OnFileChoose</span><span class="p">(</span> <span class="nx">filename</span> <span class="p">)</span>
-<span class="p">{</span>
-    <span class="c1">// filename</span>
-    <span class="nx">data</span> <span class="o">=</span> <span class="nx">app</span><span class="p">.</span><span class="nx">ReadFile</span><span class="p">(</span> <span class="nx">filename</span><span class="p">,</span> <span class="dl">"</span><span class="s2">base64</span><span class="dl">"</span> <span class="p">)</span>
-    <span class="nx">cloud</span><span class="p">.</span><span class="nx">Upload</span><span class="p">(</span> <span class="nx">data</span><span class="p">,</span> <span class="dl">"</span><span class="s2">jazz3.jpg</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">image/jpg</span><span class="dl">"</span><span class="p">,</span> <span class="nx">onUpload</span><span class="p">,</span> <span class="dl">"</span><span class="s2">12345</span><span class="dl">"</span> <span class="p">)</span>
-<span class="p">}</span>
+<span class="c1">// Let's assume you want to upload an image to the CloudStore</span>
+<span class="c1">// You must upload images as a string in a format such as base64</span>
+<span class="nx">cloud</span><span class="p">.</span><span class="nx">Upload</span><span class="p">(</span> <span class="nx">file_data</span><span class="p">,</span> <span class="dl">"</span><span class="s2">jazz3.jpg</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">image/jpg</span><span class="dl">"</span><span class="p">,</span> <span class="nx">onUpload</span><span class="p">,</span> <span class="dl">"</span><span class="s2">12345</span><span class="dl">"</span> <span class="p">)</span>
 
 <span class="kd">function</span> <span class="nx">onUpload</span><span class="p">(</span> <span class="nx">response</span> <span class="p">)</span>
 <span class="p">{</span>
-    <span class="k">if</span><span class="p">(</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="p">)</span> <span class="nx">app</span><span class="p">.</span><span class="nx">ShowPopup</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Error: </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">, </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">message</span> <span class="p">)</span>
-    <span class="k">else</span> <span class="nx">app</span><span class="p">.</span><span class="nx">ShowPopup</span><span class="p">(</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span> <span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="p">)</span> <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Error: </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">, </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">message</span> <span class="p">)</span>
+    <span class="k">else</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span> <span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>If you run this code you should get a response back with the messsage: <strong>File Uploaded</strong></p>
+
+<p>You can see you uploaded file in your using our <a href="https://enjine.cloud/cloudstore/admin.html">admin dashboard</a></p>
 
       </div>
       <div class="dark-box">

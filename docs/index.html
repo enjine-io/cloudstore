@@ -279,7 +279,7 @@
   color: #859900;
 }
     </style>
-    <link href="stylesheets/screen-b04e26e4.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/screen-4089f16a.css" rel="stylesheet" media="screen" />
     <link href="stylesheets/print-953e3353.css" rel="stylesheet" media="print" />
       <script src="javascripts/all-7e253337.js"></script>
 
@@ -307,6 +307,11 @@
       <ul id="toc" class="toc-list-h1">
           <li>
             <a href="#overview" class="toc-h1 toc-link" data-title="Overview">Overview</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#initializing-cloudstore" class="toc-h2 toc-link" data-title="Initializing CloudStore">Initializing CloudStore</a>
+                  </li>
+              </ul>
           </li>
           <li>
             <a href="#data" class="toc-h1 toc-link" data-title="Data">Data</a>
@@ -373,7 +378,7 @@
         <h1 id='overview'>Overview</h1>
 <div id="img-overview"><img src="images/enjine_io_architecture-5955c480.png" alt="" /></div>
 
-<p>CloudStore makes it possible to:</p>
+<p>CloudStore makes it possible to</p>
 
 <ul>
 <li>Save data and media files to a secure online location</li>
@@ -384,9 +389,25 @@
 <blockquote>
 <aside class="notice-right">CloudStore uses unique API keys to allow access to the CloudStore service.</aside>
 </blockquote>
-<h1 id='data'>Data</h1><h2 id='saving-data'>Saving data</h2>
-<p><code>cloud.Save( key, value, callback )</code></p>
-<h3 id='query-parameters'>Query Parameters</h3>
+<h2 id='initializing-cloudstore'>Initializing CloudStore</h2>
+<p>The are 2 ways to include CloudStore into your project</p>
+<h3 id='1-link-to-the-online-version'>1. Link to the online version</h3>
+<p>You can link directly to the latest version by adding the following <strong>script</strong> tag to the bottom of your html page within the <strong>body</strong> tags:</p>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="dl">"</span><span class="s2">https://enjine.io/js/latest/cloudstore.min.js</span><span class="dl">"</span><span class="o">&gt;&lt;</span><span class="sr">/script</span><span class="err">&gt;
+</span></code></pre></div><h3 id='2-download-and-use-locally'>2. Download and use locally</h3>
+<p>You can also download the latest version of the CloudStore script from <a href="https://enjine.io/js/latest/cloudstore.min.js">https://enjine.io/js/latest/cloudstore.min.js</a></p>
+
+<p>Once downloaded, copy the script to your project directory and add it to the bottom of your html page within the <strong>body</strong> tags:</p>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="dl">"</span><span class="s2">&lt;PATH_TO_YOUR_FILE&gt;/cloudstore.min.js</span><span class="dl">"</span><span class="o">&gt;&lt;</span><span class="sr">/script</span><span class="err">&gt;
+</span></code></pre></div><h3 id='initializing-cloudstore-2'>Initializing CloudStore</h3>
+<p>Before you can use CloudStore in your project you need to initialize it.  To do this add the following code:</p>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">cloud</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CloudStore</span><span class="p">(</span> <span class="dl">"</span><span class="s2">&lt;YOUR_CLOUDSTORE_KEY&gt;</span><span class="dl">"</span> <span class="p">)</span>
+</code></pre></div>
+<blockquote>
+<aside class="notice-right">You must replace <code>&lt;YOUR_CLOUDSTORE_KEY&gt;</code> with your unique CloudStore API key which you would have received when registering with enjine.io/</aside>
+</blockquote>
+<h1 id='data'>Data</h1><h2 id='saving-data'>Saving data</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">cloud</span><span class="p">.</span><span class="nx">Save</span><span class="p">(</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">password</span> <span class="p">)</span>
+</code></pre></div><h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -409,11 +430,13 @@
 <td>no</td>
 <td>A function that returns a response object: response.  If response.error is null, you can access the data through response.data.</td>
 </tr>
+<tr>
+<td>password</td>
+<td>no</td>
+<td>Password to write over the data file if already exists (Passwords are set in the CloudStore <a href="https://enjine.cloud/cloudstore/admin.html">admin dashboard</a>). If a password has been set and you do not pass the correct value, you will get an error.</td>
+</tr>
 </tbody></table>
-<h3 id='example'>Example</h3><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="c1">//Create CloudStore component.</span>
-<span class="nx">cloud</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CloudStore</span><span class="p">(</span> <span class="dl">"</span><span class="s2">&lt;YOUR_CLOUDSTORE_KEY&gt;</span><span class="dl">"</span> <span class="p">)</span>
-
-<span class="c1">//Save some data.</span>
+<h3 id='example'>Example</h3><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="c1">//Save some data.</span>
 <span class="nx">cloud</span><span class="p">.</span><span class="nx">Save</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Shopping_List</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span><span class="dl">"</span><span class="s2">Apples</span><span class="dl">"</span><span class="p">:</span><span class="mi">8</span><span class="p">,</span><span class="dl">"</span><span class="s2">Oranges</span><span class="dl">"</span><span class="p">:</span><span class="mi">6</span><span class="p">},</span> <span class="nx">onSave</span> <span class="p">)</span>
 
 <span class="c1">//Handle the response.</span>
@@ -422,13 +445,8 @@
     <span class="k">if</span><span class="p">(</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="p">)</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Error: </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">, </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">message</span> <span class="p">)</span>
     <span class="k">else</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">response</span><span class="p">.</span><span class="nx">message</span> <span class="p">)</span>
 <span class="p">}</span>
-</code></pre></div>
-<blockquote>
-<aside class="notice-right">You must replace <code>&lt;YOUR_CLOUDSTORE_KEY&gt;</code> with your personal CloudStore key.</aside>
-</blockquote>
-<h2 id='getting-data'>Getting data</h2>
-<p><code>cloud.Load( key, callback, password )</code></p>
-<h3 id='query-parameters-2'>Query Parameters</h3>
+</code></pre></div><h2 id='getting-data'>Getting data</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">cloud</span><span class="p">.</span><span class="nx">Load</span><span class="p">(</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">password</span> <span class="p">)</span><span class="s2">`
+</span></code></pre></div><h3 id='query-parameters-2'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -452,33 +470,20 @@
 <td>Password to access the data file (Passwords are set in the CloudStore <a href="https://enjine.cloud/cloudstore/admin.html">admin dashboard</a>). If a password has been set and you do not pass the correct value, you will get an error.</td>
 </tr>
 </tbody></table>
-<h3 id='example-2'>Example</h3><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="c1">//Create CloudStore component.</span>
-<span class="nx">cloud</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CloudStore</span><span class="p">(</span> <span class="dl">"</span><span class="s2">&lt;YOUR_CLOUDSTORE_KEY&gt;</span><span class="dl">"</span> <span class="p">)</span>
-
-<span class="c1">//Load some data.</span>
+<h3 id='example-2'>Example</h3><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="c1">//Load some data.</span>
 <span class="nx">cloud</span><span class="p">.</span><span class="nx">Load</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Shopping_List</span><span class="dl">"</span><span class="p">,</span> <span class="nx">onLoad</span> <span class="p">)</span>
 
 <span class="c1">//Handle the response.</span>
 <span class="kd">function</span> <span class="nx">onLoad</span><span class="p">(</span> <span class="nx">response</span> <span class="p">)</span>
 <span class="p">{</span>
-    <span class="k">if</span><span class="p">(</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="p">)</span> <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Error: </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">, </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">message</span> <span class="p">)</span>
+    <span class="k">if</span><span class="p">(</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="p">)</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Error: </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">, </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">message</span> <span class="p">)</span>
     <span class="k">else</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span> <span class="p">)</span>
 <span class="p">}</span>
-</code></pre></div><h2 id='merging-data'>Merging data</h2>
-<p><code>cloud.Merge( key, value, callback, password )</code></p>
+</code></pre></div><h2 id='merging-data'>Merging data</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">cloud</span><span class="p">.</span><span class="nx">Merge</span><span class="p">(</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">password</span> <span class="p">)</span>
+</code></pre></div>
+<p>The <strong>Merge</strong> function allows you to merge and update existing data objects.  If the data object you are trying to merge with does not exist, it will create a new object.</p>
 
-<p>The <strong>Merge</strong> function allows you to merge and update existing data objects.</p>
-
-<p>If the data object you are trying to merge with does not exist, it will create a new object with the <strong>key</strong> parameter. </p>
-
-<ul>
-<li>The <strong>Merge</strong> function recursively merges values passed with the source object, replacing any existing data and adding new data.</li>
-<li>Source properties that resolve to null are skipped if a destination value exists.</li>
-<li>Array and plain object properties are merged recursively.</li>
-<li>Other objects and value types are overridden by assignment.</li>
-<li>Source objects are applied from left to right.</li>
-<li>Subsequent sources overwrite property assignments of previous sources.</li>
-</ul>
+<p>The function recursively merges values passed from the source object, replacing existing data and adding new data.  It will also recursively merge arrays.</p>
 
 <table><thead>
 <tr>
@@ -508,10 +513,7 @@
 <td>Password to access data file if one is set</td>
 </tr>
 </tbody></table>
-<h3 id='example-3'>Example</h3><h4 id='app-1'>App 1</h4><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="c1">//Create CloudStore component.</span>
-<span class="nx">cloud</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CloudStore</span><span class="p">(</span> <span class="dl">"</span><span class="s2">&lt;YOUR_CLOUDSTORE_KEY&gt;</span><span class="dl">"</span> <span class="p">)</span>
-
-<span class="c1">//Save some data.</span>
+<h3 id='example-3'>Example</h3><h4 id='app-1'>App 1</h4><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="c1">// Save some data.</span>
 <span class="nx">cloud</span><span class="p">.</span><span class="nx">Save</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Shopping_List</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span><span class="dl">"</span><span class="s2">Apples</span><span class="dl">"</span><span class="p">:</span><span class="mi">8</span><span class="p">,</span><span class="dl">"</span><span class="s2">Oranges</span><span class="dl">"</span><span class="p">:</span><span class="mi">6</span><span class="p">},</span> <span class="nx">onSave</span> <span class="p">)</span>
 
 <span class="kd">function</span> <span class="nx">onSave</span><span class="p">(</span> <span class="nx">response</span> <span class="p">)</span>
@@ -519,10 +521,7 @@
     <span class="k">if</span><span class="p">(</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="p">)</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Error: </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">, </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">message</span> <span class="p">)</span>
     <span class="k">else</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">response</span><span class="p">.</span><span class="nx">message</span> <span class="p">)</span>
 <span class="p">}</span>
-</code></pre></div><h4 id='app-2'>App 2</h4><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="c1">// Create CloudStore component.</span>
-<span class="nx">cloud</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CloudStore</span><span class="p">(</span> <span class="dl">"</span><span class="s2">&lt;YOUR_CLOUDSTORE_KEY&gt;</span><span class="dl">"</span> <span class="p">)</span>
-
-<span class="c1">// Update our Shopping List with some a new item and change the value of existing items.</span>
+</code></pre></div><h4 id='app-2'>App 2</h4><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="c1">// Update our Shopping List with some a new item and change the value of existing items.</span>
 <span class="nx">cloud</span><span class="p">.</span><span class="nx">Merge</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Shopping_List</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span><span class="dl">"</span><span class="s2">Apples</span><span class="dl">"</span><span class="p">:</span><span class="mi">8</span><span class="p">,</span><span class="dl">"</span><span class="s2">Oranges</span><span class="dl">"</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="dl">"</span><span class="s2">Bananas</span><span class="dl">"</span><span class="p">:</span><span class="mi">8</span><span class="p">},</span> <span class="nx">onSave</span> <span class="p">)</span>
 
 <span class="c1">// Handle the response.</span>
@@ -542,18 +541,16 @@
 <span class="kd">function</span> <span class="nx">onLoad</span><span class="p">(</span> <span class="nx">response</span> <span class="p">)</span>
 <span class="p">{</span>
     <span class="c1">// You should now see your new Shopping_List with 10 Oranges and 8 Bananas</span>
-    <span class="k">if</span><span class="p">(</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="p">)</span> <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Error: </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">, </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">message</span> <span class="p">)</span>
+    <span class="k">if</span><span class="p">(</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="p">)</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Error: </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">, </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">message</span> <span class="p">)</span>
     <span class="k">else</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span> <span class="p">)</span>
 <span class="p">}</span>
-</code></pre></div><h2 id='listing-data-files'>Listing Data Files</h2>
-<p><code>cloud.List( filter, callback )</code></p>
-
+</code></pre></div><h2 id='listing-data-files'>Listing Data Files</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">cloud</span><span class="p">.</span><span class="nx">List</span><span class="p">(</span> <span class="nx">filter</span><span class="p">,</span> <span class="nx">callback</span> <span class="p">)</span>
+</code></pre></div>
 <p>The <strong>List</strong> function allows you to get a comma separated list of all your data files that match the filter.  </p>
 
 <p>For example, if you had two data files with the keys &quot;steve1&quot; and &quot;steve2&quot; and called the <strong>List</strong> function like this:</p>
-
-<p>&#39;cloud.List( &quot;steve&quot;, callback )&#39;</p>
-
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">cloud</span><span class="p">.</span><span class="nx">List</span><span class="p">(</span> <span class="dl">"</span><span class="s2">steve</span><span class="dl">"</span><span class="p">,</span> <span class="nx">callback</span> <span class="p">)</span>
+</code></pre></div>
 <p>You would get back a comma separated string that looked like this: &quot;steve1,steve2&quot;.</p>
 
 <table><thead>
@@ -574,10 +571,7 @@
 <td>A function that returns a response object: response.  If response.error is null, you can access the data through response.data.</td>
 </tr>
 </tbody></table>
-<h3 id='example-4'>Example</h3><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="c1">//Create CloudStore component.</span>
-<span class="nx">cloud</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CloudStore</span><span class="p">(</span> <span class="dl">"</span><span class="s2">&lt;YOUR_CLOUDSTORE_KEY&gt;</span><span class="dl">"</span> <span class="p">)</span>
-
-<span class="nx">cloud</span><span class="p">.</span><span class="nx">List</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Shopping</span><span class="dl">"</span><span class="p">,</span> <span class="nx">onList</span> <span class="p">)</span>
+<h3 id='example-4'>Example</h3><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">cloud</span><span class="p">.</span><span class="nx">List</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Shopping</span><span class="dl">"</span><span class="p">,</span> <span class="nx">onList</span> <span class="p">)</span>
 
 <span class="c1">//Handle the response.</span>
 <span class="kd">function</span> <span class="nx">onList</span><span class="p">(</span> <span class="nx">response</span> <span class="p">)</span>
@@ -590,9 +584,8 @@
 <blockquote>
 <aside class="notice-right">This will show a comma separated list of all files matching your filter</aside>
 </blockquote>
-<h2 id='deleting-data'>Deleting data</h2>
-<p><code>cloud.Delete( key, callback, password )</code></p>
-
+<h2 id='deleting-data'>Deleting data</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">cloud</span><span class="p">.</span><span class="nx">Delete</span><span class="p">(</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">password</span> <span class="p">)</span>
+</code></pre></div>
 <p>The <strong>Delete</strong> function allows you to delete existing data objects from the CloudStore.</p>
 
 <p>You delete cloudstore objects by sending the id of the item you wish to remove. 
@@ -621,10 +614,7 @@ If you try removing an object that does not exist, it will return with an error 
 <td>The value for the <strong>edit</strong> password set in the CloudStore <a href="https://enjine.cloud/cloudstore/admin.html">admin dashboard</a></td>
 </tr>
 </tbody></table>
-<h3 id='example-5'>Example</h3><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="c1">//Create CloudStore component.</span>
-<span class="nx">cloud</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CloudStore</span><span class="p">(</span> <span class="dl">"</span><span class="s2">&lt;YOUR_CLOUDSTORE_KEY&gt;</span><span class="dl">"</span> <span class="p">)</span>
-
-<span class="nx">cloud</span><span class="p">.</span><span class="nx">Delete</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Shopping_List</span><span class="dl">"</span><span class="p">,</span> <span class="nx">onDelete</span> <span class="p">)</span>
+<h3 id='example-5'>Example</h3><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">cloud</span><span class="p">.</span><span class="nx">Delete</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Shopping_List</span><span class="dl">"</span><span class="p">,</span> <span class="nx">onDelete</span> <span class="p">)</span>
 
 <span class="c1">//Handle the response.</span>
 <span class="kd">function</span> <span class="nx">onDelete</span><span class="p">(</span> <span class="nx">response</span> <span class="p">)</span>
@@ -643,9 +633,8 @@ and stay persistent event when your app is removed from your device.</p>
 <blockquote>
 <aside class="notice-right">To access your media files across multiple apps, you must use the same api key in each app</aside>
 </blockquote>
-<h2 id='upload'>Upload</h2>
-<p><code>cloud.Upload( data, filename, type, callback, password )</code></p>
-
+<h2 id='upload'>Upload</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">cloud</span><span class="p">.</span><span class="nx">Upload</span><span class="p">(</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">filename</span><span class="p">,</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">password</span> <span class="p">)</span>
+</code></pre></div>
 <p>The <strong>Upload</strong> function allows you to upload a file to the cloud.  You can set permissions for editing files in the <a href="https://enjine.cloud/cloudstore/admin.html">admin dashboard</a></p>
 
 <table><thead>
@@ -685,9 +674,7 @@ and stay persistent event when your app is removed from your device.</p>
 <blockquote>
 <aside class="notice-right">There are no limitations to what file types can be uploaded, so long as they can be turned into a blob. Alternatively if you have a file already in a blob format, you can pass this directly in to the data parameter.</aside>
 </blockquote>
-<h3 id='example-6'>Example</h3><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">cloud</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CloudStore</span><span class="p">(</span> <span class="dl">"</span><span class="s2">&lt;YOUR_CLOUDSTORE_KEY&gt;</span><span class="dl">"</span> <span class="p">)</span>
-
-<span class="c1">// Let's assume you want to upload an image to the CloudStore</span>
+<h3 id='example-6'>Example</h3><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="c1">// Let's assume you want to upload an image to the CloudStore</span>
 <span class="c1">// You must upload images as a string in a format such as base64</span>
 <span class="nx">cloud</span><span class="p">.</span><span class="nx">Upload</span><span class="p">(</span> <span class="nx">file_data</span><span class="p">,</span> <span class="dl">"</span><span class="s2">jazz3.jpg</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">image/jpg</span><span class="dl">"</span><span class="p">,</span> <span class="nx">onUpload</span> <span class="p">)</span>
 
@@ -745,27 +732,21 @@ in the panel to the right of the list.</p>
 <p><img src="images/dashboard_df_pwd_3-27173546.png" alt="" /></p>
 
 <p>Now let&#39;s see what happens if we try merging new items into our shopping list without appending the password to our <strong>Merge</strong> function</p>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="c1">//Create CloudStore component.</span>
-<span class="nx">cloud</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CloudStore</span><span class="p">(</span> <span class="dl">"</span><span class="s2">&lt;YOUR_CLOUDSTORE_KEY&gt;</span><span class="dl">"</span> <span class="p">)</span>
-
-<span class="kd">function</span> <span class="nx">btnMerge_OnTouch</span><span class="p">()</span>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">function</span> <span class="nx">btnMerge_OnTouch</span><span class="p">()</span>
 <span class="p">{</span>
     <span class="nx">cloud</span><span class="p">.</span><span class="nx">Merge</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Shopping_List</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span> <span class="na">plums</span><span class="p">:</span><span class="mi">5</span> <span class="p">},</span> <span class="nx">onMerge</span> <span class="p">)</span>
 <span class="p">}</span>
 
 <span class="kd">function</span> <span class="nx">onMerge</span><span class="p">(</span> <span class="nx">response</span> <span class="p">)</span>
 <span class="p">{</span>
-    <span class="k">if</span><span class="p">(</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="p">)</span> <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Error: </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">, </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">message</span> <span class="p">)</span>
+    <span class="k">if</span><span class="p">(</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="p">)</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Error: </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">, </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">message</span> <span class="p">)</span>
     <span class="k">else</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span> <span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>If you try to run the code above you will get the following response in response.error: <strong>Locked</strong>.</p>
 
 <p>Now let&#39;s send the correct password as the final parameter in the <strong>Merge</strong> function like so:</p>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="c1">//Create CloudStore component.</span>
-<span class="nx">cloud</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CloudStore</span><span class="p">(</span> <span class="dl">"</span><span class="s2">&lt;YOUR_CLOUDSTORE_KEY&gt;</span><span class="dl">"</span> <span class="p">)</span>
-
-<span class="kd">function</span> <span class="nx">btnMerge_OnTouch</span><span class="p">()</span>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">function</span> <span class="nx">btnMerge_OnTouch</span><span class="p">()</span>
 <span class="p">{</span>
     <span class="nx">cloud</span><span class="p">.</span><span class="nx">Merge</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Shopping_List</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span> <span class="na">plums</span><span class="p">:</span><span class="mi">5</span> <span class="p">},</span> <span class="nx">onMerge</span><span class="p">,</span> <span class="dl">"</span><span class="s2">12345</span><span class="dl">"</span> <span class="p">)</span>
 <span class="p">}</span>
@@ -813,16 +794,14 @@ including a preview snapshot of the file if it&#39;s an image file.</p>
     - Assign a password to the file using our <a href="https://enjine.cloud/cloudstore/admin.html">admin dashboard</a>
     - Now whenever we want to override the file, we must include the password as our final parameter in the <strong>Upload</strong> function</p>
 
-<p><code>For thie example we have assigned the password as &quot;12345&quot;</code></p>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">cloud</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CloudStore</span><span class="p">(</span> <span class="dl">"</span><span class="s2">&lt;YOUR_CLOUDSTORE_KEY&gt;</span><span class="dl">"</span> <span class="p">)</span>
-
-<span class="c1">// Let's assume you want to upload an image to the CloudStore</span>
+<p>For thie example we have assigned the password as <strong>12345</strong></p>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="c1">// Let's assume you want to upload an image to the CloudStore</span>
 <span class="c1">// You must upload images as a string in a format such as base64</span>
 <span class="nx">cloud</span><span class="p">.</span><span class="nx">Upload</span><span class="p">(</span> <span class="nx">file_data</span><span class="p">,</span> <span class="dl">"</span><span class="s2">jazz3.jpg</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">image/jpg</span><span class="dl">"</span><span class="p">,</span> <span class="nx">onUpload</span><span class="p">,</span> <span class="dl">"</span><span class="s2">12345</span><span class="dl">"</span> <span class="p">)</span>
 
 <span class="kd">function</span> <span class="nx">onUpload</span><span class="p">(</span> <span class="nx">response</span> <span class="p">)</span>
 <span class="p">{</span>
-    <span class="k">if</span><span class="p">(</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="p">)</span> <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Error: </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">, </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">message</span> <span class="p">)</span>
+    <span class="k">if</span><span class="p">(</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="p">)</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span> <span class="dl">"</span><span class="s2">Error: </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">, </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">message</span> <span class="p">)</span>
     <span class="k">else</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span> <span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div>

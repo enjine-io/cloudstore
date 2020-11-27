@@ -3,8 +3,9 @@
 //=============================================================================
 
 /** 
-  * @desc This class holds functions for communicating with enjine.io cloud storage utility.
-  * @authors Copyright 2020 enjine.io, support@enjine.io
+  * @desc this class holds functions for communicating with enjine.io cloud storage utility
+  * It is designed to work with paid subscribers
+  * @authors copyright 2021 enjine.io, David Hurren david.enjine.io@gmail.com, Ben Hurren, Gareth Wiseman
 */
 
 class CloudStore

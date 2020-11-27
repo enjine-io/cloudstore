@@ -147,8 +147,7 @@ class CloudStore
     {
         try {  
             if( !this.rateCheck() ) {
-                //setTimeout( ()=>{ this.upload(data, name, type, callback, password) }, this.m_maxRate + 500 )
-                //we don't want to keep trying to upload the same file so we'll just return
+                setTimeout( ()=>{ this.upload(data, name, type, callback, password) }, this.m_maxRate + 500 )                
                 return
             }
 

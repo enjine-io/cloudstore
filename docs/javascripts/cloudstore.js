@@ -1,3 +1,13 @@
+//=============================================================================
+// cloudstore.js v1.0
+//=============================================================================
+
+/** 
+  * @desc this class holds functions for communicating with enjine.io cloud storage utility
+  * It is designed to work with paid subscribers
+  * @authors copyright 2021 enjine.io, David Hurren david.enjine.io@gmail.com, Ben Hurren, Gareth Wiseman
+*/
+
 class CloudStore
 {
 	constructor(key, server)
@@ -8,7 +18,8 @@ class CloudStore
 		this.m_apiKey = key;
 		this.m_maxRate = 3000;
 		this.m_tlast = 0;
-		this.m_retry = true;
+        this.m_retry = true;
+        this.m_version = 1;
 	}
 	
 	rateCheck()
@@ -125,7 +136,10 @@ class CloudStore
             var json = { key: this.m_apiKey, file: file, options: "list", id: "_data" };
             const url = this.server + "/store/load"
             const options = { body:JSON.stringify(json), headers:{"Content-type":"application/json; charset=UTF-8"}}
-            this.sendData(url,options).then((response) => { if(callback) callback(response); })
+            this.sendData(url,options).then((response) => { 
+                response.data = response.message || "";
+                if(callback) callback(response); }
+            )
 
         } catch(error) {
             console.error(error)
@@ -138,7 +152,8 @@ class CloudStore
         try {  
             if( !this.rateCheck() ) {
                 //setTimeout( ()=>{ this.upload(data, name, type, callback, password) }, this.m_maxRate + 500 )
-                return
+				//we don't want to keep trying to upload the same file so we'll just return
+				return
             }
 
             var formData = new FormData();            
@@ -155,15 +170,10 @@ class CloudStore
         } catch(error) {
             console.error(error)
             if(callback) callback({error:"Error uploading the file!"})
-        }
-        /*
-            console.log("Name: " + servResp.data.name);
-			console.log("Size: " + servResp.data.size);
-            console.log("Id: " + servResp.data.id);
-        */
+        }        
 	}
 	
-	b64toBlob = (b64Data, fileName='',contentType='', sliceSize=512) => {
+	b64toBlob(b64Data, fileName='',contentType='', sliceSize=512) {
         try {
             const byteCharacters = atob(b64Data);
             const byteArrays = [];

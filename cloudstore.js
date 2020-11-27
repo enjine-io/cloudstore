@@ -169,7 +169,8 @@ class CloudStore
         }        
     }
     
-    b64toBlob(b64Data, fileName='',contentType='', sliceSize=512) {
+    b64toBlob(b64Data, fileName='',contentType='', sliceSize=512) 
+    {
         try {
             const byteCharacters = atob(b64Data);
             const byteArrays = [];

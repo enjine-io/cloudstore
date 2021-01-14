@@ -18,7 +18,7 @@ class CloudStore:
     rateOff = 0.01 # minimum offset in seconds between requests
     lock = threading.Lock() # main thread lock for synchronizing
     
-    def __init__(self, key, server="https://enjine.cloud/cloudstore"):
+    def __init__(self, key, server="https://enjine.cloud/cloudstored"):
         self.server = server # host server url
         self.m_apiKey = key  # private api key
         self.m_retry = True  # (unused boolean) for retrying failed requests
@@ -27,34 +27,34 @@ class CloudStore:
     @classmethod
     def rateCheck(self):
         res = True
+        self.lock.acquire()
         n = time.time()
         if n - self.__tlast < self.maxRate: res = False
         else: self.__tlast = n
+        self.lock.release()
         return res
 
     @classmethod
     def getRemainingRate(self):
-        return self.maxRate - (time.time() - self.__tlast)
+        self.lock.acquire()
+        res = self.maxRate - (time.time() - self.__tlast)
+        self.lock.release()
+        return res
 
     @classmethod
-    def sendData(self, url, params=None, cb=None, method="POST", **kwargs):
-        t = threading.Thread(target=self.__asyncSendData, args=[url, params, cb, method], kwargs=kwargs)
+    def sendData(self, url, json=None, cb=None, method="POST", **kwargs):
+        t = threading.Thread(target=self.__asyncSendData, args=[url, json, cb, method], kwargs=kwargs)
         t.start()
         return t
 
     @classmethod
-    def __asyncSendData(self, url, params=None, cb=None, method="POST", **kwargs):
-        while True:
-            self.lock.acquire()
-            if self.rateCheck(): break
-            delay = self.getRemainingRate() + self.rateOff
-            self.lock.release()
-            time.sleep(delay)
-        self.lock.release()
+    def __asyncSendData(self, url, data=None, cb=None, method="POST", **kwargs):
+        while not self.rateCheck():
+            time.sleep(self.getRemainingRate() + self.rateOff)
 
         r = res = None
         try:
-            r = requests.request(method, url, json=params, **kwargs)
+            r = requests.request(method, url, json=data, **kwargs)
             if r.status_code == 200: res = r.json()
             else: res = { "error": "Http error", "message": r.reason, "exception": requests.HTTPError(response=r) }
 
@@ -70,27 +70,27 @@ class CloudStore:
             self.lock.release()
         
     def save(self, file, obj, callback=None, password=None):
-        params = { "key": self.m_apiKey, "file": file, "options": None, "id": "_data", "value": obj, "password": password }
-        self.sendData(self.server + "/store/save", params, callback)
+        data = { "key": self.m_apiKey, "file": file, "options": None, "id": "_data", "value": obj, "password": password }
+        self.sendData(self.server + "/store/save", data, callback)
 
     def merge(self, file, obj, callback=None, password=None):
-        params = { "key": self.m_apiKey, "file": file, "options": "merge", "id": "_data", "value": obj, "password": password }
-        self.sendData(self.server + "/store/save", params, callback)
+        data = { "key": self.m_apiKey, "file": file, "options": "merge", "id": "_data", "value": obj, "password": password }
+        self.sendData(self.server + "/store/save", data, callback)
 
     def delete(self, file, callback=None, password=None):
-        params = { "key": self.m_apiKey, "file": file, "options": "delete", "id": "_data", "password": password }
-        self.sendData(self.server + "/store/save", params, callback)
+        data = { "key": self.m_apiKey, "file": file, "options": "delete", "id": "_data", "password": password }
+        self.sendData(self.server + "/store/save", data, callback)
 
     def load(self, file, callback=None, password=None):
-        params = { "key": self.m_apiKey, "file": file, "options": None, "id": "_data", "password": password }
-        self.sendData(self.server + "/store/load", params, callback)
+        data = { "key": self.m_apiKey, "file": file, "options": None, "id": "_data", "password": password }
+        self.sendData(self.server + "/store/load", data, callback)
 
     def list(self, file="", callback=None, password=None):
-        params = { "key": self.m_apiKey, "file": file, "options": "list", "id": "_data", "password": password }
-        self.sendData(self.server + "/store/load", params, callback)
+        data = { "key": self.m_apiKey, "file": file, "options": "list", "id": "_data", "password": password }
+        self.sendData(self.server + "/store/load", data, callback)
 
     def upload(self, data, name, mimetype, callback=None, password=None):
-        params = { "key": self.m_apiKey, "password": password }
-        self.sendData(self.server + "/upload-2", None, callback, data=params, files=[("file", (name, data, mimetype))])
+        data = { "key": self.m_apiKey, "password": password }
+        self.sendData(self.server + "/upload-2", None, callback, data=data, files=[("file", (name, data, mimetype))])
 
 

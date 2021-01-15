@@ -2,7 +2,7 @@
 from CloudStore import CloudStore
 import time
 
-cloud = CloudStore("ZFA5mAkxjVznvSsXOUxE")
+cloud = CloudStore(<YOUR API KEY HERE>)
 
 
 

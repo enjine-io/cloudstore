@@ -395,50 +395,19 @@
 <p>You can link directly to the latest version by adding the following <strong>script</strong> tag inside your <strong>head</strong> tags:</p>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="dl">"</span><span class="s2">https://cdn.jsdelivr.net/gh/enjine-io/cloudstore@main/cloudstore.min.js</span><span class="dl">"</span><span class="o">&gt;&lt;</span><span class="sr">/script</span><span class="err">&gt;
 </span></code></pre></div><h3 id='2-download-and-use-locally'>2. Download and use locally</h3>
-<p>You can download the latest version of the CloudStore script from the enjine.io GitHub repo at <a href="https://github.com/enjine-io/cloudstore">https://github.com/enjine-io/cloudstore</a>
- <a href="https://cdn.jsdelivr.net/gh/enjine-io/cloudstore@main/cloudstore.min.js">https://cdn.jsdelivr.net/gh/enjine-io/cloudstore@main/cloudstore.min.js</a></p>
+<p>You can download the latest version of the CloudStore script from our GitHub repo at <a href="https://github.com/enjine-io/cloudstore">https://github.com/enjine-io/cloudstore</a></p>
 
-<p>Once downloaded, copy the script to your project directory and add it to your html file inside the <strong>head</strong> tags:</p>
+<p>Once downloaded, copy the script to your project directory and add it to your html file inside the <strong>head</strong> tags</p>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="dl">"</span><span class="s2">&lt;PATH_TO_YOUR_FILE&gt;/cloudstore.min.js</span><span class="dl">"</span><span class="o">&gt;&lt;</span><span class="sr">/script</span><span class="err">&gt;
 </span></code></pre></div><h3 id='initializing-cloudstore'>Initializing CloudStore</h3>
-<p>Before you can use CloudStore in your project you need to initialize it like this:
-<code>javascript
-new CloudStore( key, server, options )
-</code></p>
-<h3 id='query-parameters'>Query Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>key</td>
-<td>yes</td>
-<td>A string id to identify the data to store. This value is case sensitive.</td>
-</tr>
-<tr>
-<td>server</td>
-<td>no</td>
-<td>The name of the server.  You can send null as the value.</td>
-</tr>
-<tr>
-<td>options</td>
-<td>no</td>
-<td>The options parameter is an object where you can pass global passwords for accessing either the Data files or Media files in the cloudstore.  The passwords must be set in the <strong>CloudStore dashboard</strong>.</td>
-</tr>
-</tbody></table>
-
-<p>Below is an example:</p>
-<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span> <span class="na">dataPass</span><span class="p">:</span> <span class="dl">"</span><span class="s2">bingo</span><span class="dl">"</span><span class="p">,</span> <span class="na">mediaPass</span><span class="p">:</span> <span class="dl">"</span><span class="s2">bobbo</span><span class="dl">"</span> <span class="p">};</span>
-<span class="kd">const</span> <span class="nx">cloud</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CloudStore</span><span class="p">(</span> <span class="dl">"</span><span class="s2">&lt;YOUR_CLOUDSTORE_KEY&gt;</span><span class="dl">"</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">options</span> <span class="p">)</span>
+<p>Before you can use CloudStore in your project you need to initialize it.  To do this add the following code:</p>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">cloud</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CloudStore</span><span class="p">(</span> <span class="dl">"</span><span class="s2">&lt;YOUR_CLOUDSTORE_KEY&gt;</span><span class="dl">"</span> <span class="p">)</span>
 </code></pre></div>
 <blockquote>
 <aside class="notice-right">You must replace <code>&lt;YOUR_CLOUDSTORE_KEY&gt;</code> with your unique CloudStore API key which you would have received when registering with enjine.io/</aside>
 </blockquote>
 <h1 id='data'>Data</h1><h2 id='saving-data'>Saving data</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">cloud</span><span class="p">.</span><span class="nx">save</span><span class="p">(</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">password</span> <span class="p">)</span>
-</code></pre></div><h3 id='query-parameters-2'>Query Parameters</h3>
+</code></pre></div><h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -477,7 +446,7 @@ new CloudStore( key, server, options )
     <span class="k">else</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">response</span><span class="p">.</span><span class="nx">message</span> <span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div><h2 id='loading-data'>Loading data</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="nx">cloud</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">password</span> <span class="p">)</span>
-</code></pre></div><h3 id='query-parameters-3'>Query Parameters</h3>
+</code></pre></div><h3 id='query-parameters-2'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>

@@ -1,5 +1,6 @@
+
 //=============================================================================
-// cloudstore.js v1.0
+// cloudstore.js v1.1
 //=============================================================================
 
 /** 
@@ -9,7 +10,7 @@
 
 class CloudStore
 {
-    constructor(key, server)
+    constructor(key, server, options)
     {
         //Properties
         if(!server) this.server = "https://enjine.cloud/cloudstore"
@@ -18,7 +19,12 @@ class CloudStore
         this.m_maxRate = 3000;
         this.m_tlast = 0;
         this.m_retry = true;
-        this.m_version = 1;
+        this.m_version = 1.1;
+        if(options)
+        {
+            this.m_mediaPass = options.mediaPass;
+            this.m_dataPass = options.dataPass;
+        }
     }
     
     rateCheck()
@@ -52,7 +58,7 @@ class CloudStore
                 setTimeout( ()=>{ this.save(file,obj,callback,password) }, this.m_maxRate + 500 )
                 return
             }            
-            const json = {key: this.m_apiKey, file: file, options: null, id: "_data", value: obj, password: password}            
+            const json = {key: this.m_apiKey, file: file, options: null, id: "_data", value: obj, password: password, dataPass: this.m_dataPass}            
             const url = this.server + "/store/save"
             const options = {body:JSON.stringify(json),headers:{"Content-type":"application/json; charset=UTF-8"}}
             this.sendData(url,options).then((response) => { if(callback) callback(response); })        
@@ -69,7 +75,7 @@ class CloudStore
                 setTimeout( ()=>{ this.merge(file,obj,callback,password) }, this.m_maxRate + 500 )
                 return
             }
-            const json = { key: this.m_apiKey, file: file, options: "merge", id: "_data", value: obj, password: password}
+            const json = { key: this.m_apiKey, file: file, options: "merge", id: "_data", value: obj, password: password, dataPass: this.m_dataPass}
             const url = this.server + "/store/save"
             const options = { body:JSON.stringify(json), headers:{"Content-type":"application/json; charset=UTF-8"} }        
             this.sendData(url,options).then((response) => { if(callback) callback(response); })
@@ -87,7 +93,7 @@ class CloudStore
                 return
             }
                         
-            const json = { key: this.m_apiKey, file: file, options: "delete", id: "_data", value: null, password: password}
+            const json = { key: this.m_apiKey, file: file, options: "delete", id: "_data", value: null, password: password, dataPass: this.m_dataPass}
             const url = this.server + "/store/save"
             const options = { body:JSON.stringify(json), headers:{"Content-type":"application/json; charset=UTF-8"} }        
             this.sendData(url,options).then((response) => { if(callback) callback(response); })
@@ -106,7 +112,7 @@ class CloudStore
                 return
             }
             
-            var json = { key: this.m_apiKey, file: file, options: null, id: "_data", password: password };
+            var json = { key: this.m_apiKey, file: file, options: null, id: "_data", password: password, dataPass: this.m_dataPass };
             const url = this.server + "/store/load"
             const options = { body:JSON.stringify(json), headers:{"Content-type":"application/json; charset=UTF-8"}}       
             this.sendData(url,options).then((response) => { 
@@ -129,7 +135,7 @@ class CloudStore
             }
 
             if(!file) file = "";                                    
-            var json = { key: this.m_apiKey, file: file, options: "list", id: "_data" };
+            var json = { key: this.m_apiKey, file: file, options: "list", id: "_data", dataPass: this.m_dataPass };
             const url = this.server + "/store/load"
             const options = { body:JSON.stringify(json), headers:{"Content-type":"application/json; charset=UTF-8"}}
             this.sendData(url,options).then((response) => { 
@@ -157,6 +163,7 @@ class CloudStore
             formData.append("file", blob);            
             formData.append("key", this.m_apiKey);
             formData.append("password", password);
+            formData.append("mediaPass", this.m_mediaPass);
             
             const url = this.server + "/upload-2"
             const options = { body:formData }     

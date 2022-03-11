@@ -18,7 +18,7 @@ class CloudStore:
     rateOff = 0.01 # minimum offset in seconds between requests
     lock = threading.Lock() # main thread lock for synchronizing
     
-    def __init__(self, key, server="https://enjine.cloud/cloudstored"):
+    def __init__(self, key, server="https://enjine.cloud/cloudstore"):
         self.server = server # host server url
         self.m_apiKey = key  # private api key
         self.m_retry = True  # (unused boolean) for retrying failed requests
